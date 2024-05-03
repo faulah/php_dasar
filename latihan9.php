@@ -10,23 +10,18 @@
     <meta name="author" content="Khoirul Faulah Nr">
 </head>
 <body>
-    <h1> Perulangan </h1>
     <?php
-    // Array nilai yang diberikan
-    $nilai_list = [12, 13, 15, 16, 67, 189, 346, 876, 54232, 3256];
-
-    // Looping melalui setiap nilai dan menampilkan apakah ganjil atau genap
-    echo "<ul>";
-    foreach ($nilai_list as $nilai) {
-        echo "<li>Nilai $nilai adalah ";
-        if ($nilai % 2 == 0) {
-            echo "genap</li>";
-        } else {
-            echo "ganjil</li>";
-        }
+    function writeMsg ($nama) {
+        echo "Selamat Datang ". $nama."<br>";
     }
-    echo "</ul>";
-    ?>
+    writeMsg (nama: "Ahmad");
 
+    function tambah(int $angka1, int $angka2) {
+        $a = $angka1 + $angka2;
+        return $a;
+    }
+    $hasil = tambah (angka1: 5, angka2: 5);
+    echo ($hasil);
+    ?>
 </body>
 </html>

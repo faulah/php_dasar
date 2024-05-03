@@ -11,17 +11,32 @@
 </head>
 <body>
     <?php
-    $namaBuah = array ("Nanas", "Mangga", "Jeruk","Apel", "Melon", "Manggis");
-    echo "saya suka" . $namaBuah[0].",".$namaBuah[1]."dan". $namaBuah[2].",";
+        // Array namaBuah
+        $namaBuah = array("Nanas", "Mangga", "Jeruk", "Apel", "Melon", "Manggis");
 
-    echo "saya suka" . $namaBuah[Mangga];
-    echo "saya suka" . $namaBuah[Jeruk];
-    echo "saya suka" . $namaBuah[Apel];
-    echo "saya suka" . $namaBuah[Melon];
+        // Menampilkan beberapa buah dari array
+        echo "Saya suka " . $namaBuah[0] . ", " . $namaBuah[1] . ", dan " . $namaBuah[2] . ".";
 
-    $umur = array("Andy"=>"20 tahun", "Dina"=>"19 tahun");
-    echo "umur faulah adalah".$umur["faulah"];
-    echo "umur dina adalah".$umur["dina"];
+        // Menampilkan buah-buahan tertentu dari array
+        echo "Saya suka " . $namaBuah[1] . ".";
+        echo "Saya suka " . $namaBuah[2] . ".";
+        echo "Saya suka " . $namaBuah[3] . ".";
+        echo "Saya suka " . $namaBuah[4] . ".";
+
+        // Array umur dengan asosiasi
+        $umur = array("Andy" => "35 tahun", "Ben" => "37 tahun", "Joe" => "tahun");
+
+        // Menambahkan data umur baru ke dalam array
+        $umur['Ahmad'] = "50 tahun";
     ?>
+
+    <ul>
+        <?php
+            // Loop untuk menampilkan nama dan umur dalam bentuk daftar
+            foreach ($umur as $nama => $usia) {
+                echo "<li>Umur $nama adalah $usia.</li>";
+            }
+        ?>
+    </ul>
 </body>
 </html>
