@@ -2,24 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Selamat Datang</title>
 </head>
 <body>
 <?php
-session_start(); // Mulai session
+session_start(); // Mulai sesi
 
-// Cek jika pengguna belum login (tidak ada sesi user_id)
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php"); // Redirect ke halaman login jika belum login
-    exit();
+
+// Cek apakah user sudah login
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("Location: login.php"); // Redirect ke halaman login jika belum login
+    exit;
 }
 ?>
-    <h2>Welcome</h2>
-    <?php
-    // Ambil username dari sesi user_id
-    $username = "Admin"; // Contoh penggunaan, seharusnya diambil dari database atau sumber data lainnya
-    echo "<p>Welcome, $username! You are now logged in.</p>";
-    ?>
+
+
+    <h1>Selamat Datang, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
+    <h2>Anda berhasil login, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h2>
     <p><a href="logout.php">Logout</a></p>
 </body>
 </html>
