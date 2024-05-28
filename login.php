@@ -1,7 +1,8 @@
 <?php
 session_start(); // Mulai sesi
-$name = $email = "";
-$nameErr = $emailErr = "";
+$name = $password = "";
+$nameErr = $passwordErr = "";
+$errorMsg = ""; // Variabel untuk pesan kesalahan umum
 
 // Fungsi untuk membersihkan data input
 function cleanInput($data) {
@@ -13,26 +14,30 @@ function cleanInput($data) {
 
 // Penanganan form saat metode POST digunakan
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["u"])) {
-        $nameErr = "Masukkan username";
-    } else {
-        $name = cleanInput($_POST["u"]); // Membersihkan dan menyimpan username
-    }
+    try {
+        if (empty($_POST["u"])) {
+            $nameErr = "Masukkan username";
+        } else {
+            $name = cleanInput($_POST["u"]); // Membersihkan dan menyimpan username
+        }
 
-    if (empty($_POST["p"])) {
-        $emailErr = "Masukkan password";
-    } else {
-        $email = cleanInput($_POST["p"]); // Membersihkan dan menyimpan password
-    }
+        if (empty($_POST["p"])) {
+            $passwordErr = "Masukkan password";
+        } else {
+            $password = cleanInput($_POST["p"]); // Membersihkan dan menyimpan password
+        }
 
-    // Misalnya username dan password adalah 'admin' dan 'password'
-    if ($name === 'faulah' && $email === '1') {
-        $_SESSION["loggedin"] = true;
-        $_SESSION["username"] = $name;
-        header("Location: welcome.php"); // Redirect ke halaman selamat datang
-        exit;
-    } else {
-        $nameErr = "Username atau password salah";
+        // Misalnya username dan password adalah 'admin' dan 'password'
+        if ($name === 'faulah' && $password === '1') {
+            $_SESSION["loggedin"] = true;
+            $_SESSION["username"] = $name;
+            header("Location: welcome.php"); // Redirect ke halaman selamat datang
+            exit;
+        } else {
+            throw new Exception("Username atau password salah");
+        }
+    } catch (Exception $e) {
+        $errorMsg = $e->getMessage(); // Menyimpan pesan kesalahan
     }
 }
 ?>
@@ -52,9 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span class="error"> <?php echo $nameErr; ?> </span>
         <br><br>
         Password: <input type="password" name="p">
-        <span class="error"> <?php echo $emailErr; ?> </span>
+        <span class="error"> <?php echo $passwordErr; ?> </span>
         <br><br>
         <input type="submit" value="Login">
+        <br><br>
+        <span class="error"> <?php echo $errorMsg; ?> </span>
     </form>
 </body>
 </html>
